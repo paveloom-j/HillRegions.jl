@@ -1,2 +1,8 @@
 # User's Makefile
 Makefile
+
+# Manifest files
+Manifest.toml
+
+# Any PDF in the root
+/*.pdf
