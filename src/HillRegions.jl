@@ -57,6 +57,8 @@ end
         N --> N
         _predicate(HR; no_velocity)
     end
+
+    return nothing
 end
 
 end
