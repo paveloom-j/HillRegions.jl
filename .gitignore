@@ -4,5 +4,8 @@ Makefile
 # Manifest files
 Manifest.toml
 
-# Any PDF in the root
+# Any plot in the root
 /*.pdf
+/*.svg
+/*.gif
+/*.png
