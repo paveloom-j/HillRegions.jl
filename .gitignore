@@ -1,2 +1,11 @@
 # User's Makefile
 Makefile
+
+# Manifest files
+Manifest.toml
+
+# Any plot in the root
+/*.pdf
+/*.svg
+/*.gif
+/*.png
