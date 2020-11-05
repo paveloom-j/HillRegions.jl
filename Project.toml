@@ -11,7 +11,7 @@ RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
 
 [compat]
 Colors = "~0.12.4"
-ImplicitEquations = "~1.0.0"
+ImplicitEquations = "~1.0.1"
 Parameters = "~0.12.1"
-RecipesBase = "~0.8.0"
+RecipesBase = "~1.1.0"
 julia = "1.5"
