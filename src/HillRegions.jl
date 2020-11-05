@@ -25,18 +25,26 @@ end
 
 @recipe function f(
         HR::HillRegion;
+        no_velocity=false,
         M=10,
         N=10,
-        markercolor=colorant"#7C40A0",
-        linecolor=colorant"#425378",
+        bodiesmarker=:x,
+        markercolor=colorant"#425378",
+        shapecolor=colorant"#425378",
         dpi=320,
-        no_velocity=false,
     )
 
     @assert isa(M, Int) "`M` should be of type `Int`"
     @assert isa(N, Int) "`N` should be of type `Int`"
-    @assert isa(markercolor, RGB) "`markercolor` should be of type `RGB`"
-    @assert isa(linecolor, RGB) "`linecolor` should be of type `RGB`"
+    @assert(
+        isa(markercolor, Union{RGB, Symbol}),
+        "`markercolor` should be of type `RGB` or `Symbol`",
+    )
+    @assert isa(bodiesmarker, Symbol) "`bodiesmarker` should of type `Symbol`"
+    @assert(
+        isa(shapecolor, Union{RGB, Symbol}),
+        "`shapecolor` should be of type `RGB` or `Symbol`",
+    )
     @assert isa(dpi, Int) "`dpi` should be of type `Int`"
     @assert isa(no_velocity, Bool) "`no_velocity` should be of type `Bool`"
 
@@ -46,13 +54,14 @@ end
     # Left and right bodies
     @series begin
         markercolor --> markercolor
+        markershape --> bodiesmarker
         seriestype --> :scatter
-        ([μ, 1 - μ], [0., 0.])
+        ([-μ, 1 - μ], [0., 0.])
     end
 
     # Hill region
     @series begin
-        linecolor --> linecolor
+        fillcolor --> shapecolor
         M --> M
         N --> N
         _predicate(HR; no_velocity)
