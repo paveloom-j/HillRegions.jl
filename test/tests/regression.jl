@@ -13,7 +13,7 @@ ENV["GKSwstype"]="100"
 
 @plottest(
     plot(HillRegion(1//11, 3.652916); no_velocity=true),
-    joinpath(@__DIR__, "refs", "no_velocity_true.png"),
+    joinpath(@__DIR__, "ref.png"),
     false,
     0.001
 )
