@@ -12,20 +12,17 @@ using RecipesBase
     C::Float64
 end
 
-function _predicate(HR::HillRegion; no_velocity::Bool)::ImplicitEquations.Pred
+function _predicate(HR::HillRegion)::ImplicitEquations.Pred
     @unpack μ, C = HR
     ρ₁(x, y) = √((x + μ)^2 + y^2)
     ρ₂(x, y) = √((x - 1 + μ)^2 + y^2)
-    J(x, y) = 2 * μ / ρ₂(x, y) + 2 * (1 - μ) / ρ₁(x, y) +
+    V(x, y) = 2 * μ / ρ₂(x, y) + 2 * (1 - μ) / ρ₁(x, y) +
               μ * ρ₂(x, y)^2 + (1 - μ) * ρ₁(x, y)^2
-    V²(x, y) = x'^2 + y'^2
-    Γ(x, y) = J(x, y) - V²(x, y)
-    return no_velocity ? J ⩵ C : Γ ⩵ C
+    return V ⩵ C
 end
 
 @recipe function f(
         HR::HillRegion;
-        no_velocity=false,
         M=10,
         N=10,
         bodiesmarker=:x,
@@ -46,7 +43,6 @@ end
         "`shapecolor` should be of type `RGB` or `Symbol`",
     )
     @assert isa(dpi, Int) "`dpi` should be of type `Int`"
-    @assert isa(no_velocity, Bool) "`no_velocity` should be of type `Bool`"
 
     μ = Float64(HR.μ)
     dpi --> dpi
@@ -64,7 +60,7 @@ end
         fillcolor --> shapecolor
         M --> M
         N --> N
-        _predicate(HR; no_velocity)
+        _predicate(HR)
     end
 
     return nothing
