@@ -11,7 +11,7 @@ HillRegions.Internal
 
 ```@autodocs
 Modules = [HillRegions.Internal]
-Order = [:type]
+Order = [:constant, :type]
 ```
 
 ## Functions

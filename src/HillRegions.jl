@@ -16,10 +16,11 @@ export HillRegion, _predicate
 
 using Base
 using ImplicitEquations: OInterval, Pred, ⩵
-using Parameters
+using UnPack
 
-# Type
-Base.include(Internal, "include/HillRegion.jl")
+# Types
+Base.include(Internal, "include/types/DefaultTypes.jl")
+Base.include(Internal, "include/types/HillRegion.jl")
 
 # Formulae
 Base.include(Internal, "include/formulae/_ρ₁.jl")
@@ -56,7 +57,7 @@ using .Internal
     )
     @assert isa(dpi, Int) "`dpi` should be of type `Int`"
 
-    μ = Float64(HR.μ)
+    μ = M_TYPE(HR.μ)
     dpi --> dpi
 
     # Left and right bodies

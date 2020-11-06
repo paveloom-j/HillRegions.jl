@@ -1,5 +1,5 @@
 """
-    _V(x::OInterval, y::OInterval, μ::Union{Rational{Int}, Float64}) -> Float64
+    _V(x::OInterval, y::OInterval, μ::M_TYPE) -> OInterval
 
 Return the value on the zero-velocity surface given by the Jacobi constant:
 
@@ -10,11 +10,10 @@ V(x, y, μ) = 2 μ / ρ_2(x, y) + 2 (1 - μ) / ρ_1(x, y) + μ ρ_2^2(x, y) + (1
 # Arguments
 - `x::OInterval`: the interval of coordinates of the third body on the abscissa
 - `y::OInterval`: the interval of coordinates of the third body on the ordinate
-- `μ::Union{Rational{Int}, Float64}`: the mass (dimensionless) of the smaller of the two
-  resting bodies
+- `μ::`[`M_TYPE`](@ref): the mass (dimensionless) of the smaller of the two resting bodies
 
 # Returns
-- `Float64`: the value of the function ``V``
+- `OInterval`: the interval of values of the ``V`` function
 
 # Example
 ```jldoctest; output = false
@@ -40,7 +39,7 @@ y = OInterval(Interval(1., 1.), TRUE, TRUE)
 true
 ```
 """
-function _V(x::OInterval, y::OInterval, μ::Union{Rational{Int}, Float64})::OInterval
+function _V(x::OInterval, y::OInterval, μ::M_TYPE)::OInterval
     return 2 * μ / _ρ₂(x, y, μ) + 2 * (1 - μ) / _ρ₁(x, y, μ) +
            μ * _ρ₂(x, y, μ)^2 + (1 - μ) * _ρ₁(x, y, μ)^2
 end

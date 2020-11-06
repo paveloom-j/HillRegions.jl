@@ -1,5 +1,5 @@
 """
-    _ρ₂(x::OInterval, y::OInterval, μ::Union{Rational{Int}, Float64}) -> Float64
+    _ρ₂(x::OInterval, y::OInterval, μ::M_TYPE) -> OInterval
 
 Return the distance between the second and the third bodies:
 
@@ -8,11 +8,10 @@ Return the distance between the second and the third bodies:
 # Arguments
 - `x::OInterval`: the interval of coordinates of the third body on the abscissa
 - `y::OInterval`: the interval of coordinates of the third body on the ordinate
-- `μ::Union{Rational{Int}, Float64}`: the mass (dimensionless) of the smaller of the two
-  resting bodies
+- `μ::`[`M_TYPE`](@ref): the mass (dimensionless) of the smaller of the two resting bodies
 
 # Returns
-- `Float64`: the distance
+- `OInterval`: the interval of distances
 
 # Example
 ```jldoctest; output = false
@@ -34,6 +33,6 @@ y = OInterval(Interval(1., 1.), TRUE, TRUE)
 true
 ```
 """
-function _ρ₂(x::OInterval, y::OInterval, μ::Union{Rational{Int}, Float64})::OInterval
+function _ρ₂(x::OInterval, y::OInterval, μ::M_TYPE)::OInterval
     return √((x - 1 + μ)^2 + y^2)
 end
