@@ -4,6 +4,9 @@ Makefile
 # Manifest files
 Manifest.toml
 
+# Side files when generating documentation
+docs/build
+
 # Any plot in the root
 /*.pdf
 /*.svg
