@@ -1,13 +1,13 @@
 """
-    _ρ₂(x::Float64, y::Float64, μ::Union{Rational{Int}, Float64}) -> Float64
+    _ρ₂(x::OInterval, y::OInterval, μ::Union{Rational{Int}, Float64}) -> Float64
 
 Return the distance between the second and the third bodies:
 
 ``ρ_2^2(x, y, μ) = (x - 1 + μ)^2 + y^2.``
 
 # Arguments
-- `x::Float64`: the abscissa of the third body
-- `y::Float64`: the ordinate of the third body
+- `x::OInterval`: the interval of coordinates of the third body on the abscissa
+- `y::OInterval`: the interval of coordinates of the third body on the ordinate
 - `μ::Union{Rational{Int}, Float64}`: the mass (dimensionless) of the smaller of the two
   resting bodies
 
@@ -17,17 +17,23 @@ Return the distance between the second and the third bodies:
 # Example
 ```jldoctest; output = false
 using HillRegions
+using ImplicitEquations
+using IntervalArithmetic
 
-x = y = 1.
+OInterval = HillRegions.Internal.OInterval
+TRUE = ImplicitEquations.BInterval(true, true)
+
+x = OInterval(Interval(-1., 1.), TRUE, TRUE)
+y = OInterval(Interval(1., 1.), TRUE, TRUE)
 μ = 1//11
 
-HillRegions.Internal._ρ₂(x, y, μ) == √((x - 1 + μ)^2 + y^2)
+(HillRegions.Internal._ρ₂(x, y, μ) == √((x - 1 + μ)^2 + y^2)) == TRUE
 
 # output
 
 true
 ```
 """
-function _ρ₂(x::Float64, y::Float64, μ::Union{Rational{Int}, Float64})::Float64
+function _ρ₂(x::OInterval, y::OInterval, μ::Union{Rational{Int}, Float64})::OInterval
     return √((x - 1 + μ)^2 + y^2)
 end

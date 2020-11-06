@@ -14,13 +14,18 @@ Return a predicate in the form of ``V = C`` where ``μ`` and ``C`` are from a
 ```jldoctest; output = false
 using HillRegions
 using ImplicitEquations
+using IntervalArithmetic
 
-x = y = 1.
+OInterval = HillRegions.Internal.OInterval
+TRUE = ImplicitEquations.BInterval(true, true)
+
+x = OInterval(Interval(-1., 1.), TRUE, TRUE)
+y = OInterval(Interval(1., 1.), TRUE, TRUE)
 μ = 1//11
 C = 3.0
 
 pred = HillRegions.Internal._predicate(HillRegion(μ, C))
-pred.f(x, y) == HillRegions.Internal._V(x, y, μ)
+(pred.f(x, y) == HillRegions.Internal._V(x, y, μ)) == TRUE
 
 # output
 
@@ -29,7 +34,7 @@ true
 
 See also: [`_V`](@ref), [`_ρ₁`](@ref), [`_ρ₂`](@ref)
 """
-function _predicate(HR::HillRegion)::ImplicitEquations.Pred
+function _predicate(HR::HillRegion)::Pred
     @unpack μ, C = HR
-    return ((x::Float64, y::Float64) -> _V(x, y, μ)) ⩵ C
+    return ((x::OInterval, y::OInterval) -> _V(x, y, μ)) ⩵ C
 end

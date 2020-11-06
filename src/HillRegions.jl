@@ -15,7 +15,7 @@ baremodule Internal
 export HillRegion, _predicate
 
 using Base
-using ImplicitEquations
+using ImplicitEquations: OInterval, Pred, ⩵
 using Parameters
 
 # Type
