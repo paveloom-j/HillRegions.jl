@@ -15,12 +15,18 @@ makedocs(
     # Specify the pages on the left side
     pages = [
         "Home" => "index.md",
+
+        "Library" => [
+            "Index" => "lib/index.md",
+            "Public" => "lib/public.md",
+            "lib/internals.md",
+        ],
     ],
 
     # Specify a format
     format = Documenter.HTML(
             # Custom assets
-            # assets = ["assets/custom.css"],
+            assets = ["assets/custom.css"],
             # A fallback for creating docs locally
             prettyurls = get(ENV, "CI", nothing) == "true",
         ),
