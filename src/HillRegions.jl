@@ -1,6 +1,13 @@
 __precompile__()
 
-"f"
+"""
+A complimentary package to add the recipe for
+[`Plots.jl`](https://github.com/JuliaPlots/Plots.jl) for plotting Hill regions.
+
+Links:
+- [Repo](https://github.com/paveloom-j/HillRegions.jl)
+- [Docs](https://paveloom-j.github.io/HillRegions.jl)
+"""
 baremodule HillRegions
 
 export HillRegion
@@ -9,7 +16,7 @@ using Base
 using Colors
 using RecipesBase
 
-"f"
+"This module contains all inner parts of this package."
 baremodule Internal
 
 export HillRegion, _predicate
@@ -34,6 +41,7 @@ end
 
 using .Internal
 
+"f"
 @recipe function f(
         HR::HillRegion;
         M=10,
@@ -41,7 +49,6 @@ using .Internal
         bodiesmarker=:x,
         bodiescolor=colorant"#425378",
         shapecolor=colorant"#425378",
-        dpi=320,
     )
 
     @assert isa(M, Int) "`M` should be of type `Int`"
@@ -58,7 +65,7 @@ using .Internal
     @assert isa(dpi, Int) "`dpi` should be of type `Int`"
 
     μ = M_TYPE(HR.μ)
-    dpi --> dpi
+    dpi --> 320
 
     # Left and right bodies
     @series begin
@@ -78,5 +85,13 @@ using .Internal
 
     return nothing
 end
+
+apply_recipe(plotattributes::AbstractDict{Symbol,Any}, HR::HillRegion) =
+RecipesBase.apply_recipe(plotattributes::AbstractDict{Symbol,Any}, HR::HillRegion)
+
+@doc(
+    @doc(RecipesBase.apply_recipe(plotattributes::AbstractDict{Symbol,Any}, HR::HillRegion)),
+    apply_recipe
+)
 
 end
