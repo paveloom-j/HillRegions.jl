@@ -1,11 +1,18 @@
-module HillRegions
+baremodule HillRegions
 
 export HillRegion
 
+using Base
 using Colors
+using RecipesBase
+
+baremodule Internal
+
+export HillRegion, _predicate
+
+using Base
 using ImplicitEquations
 using Parameters
-using RecipesBase
 
 @with_kw struct HillRegion
     μ::Rational
@@ -20,6 +27,10 @@ function _predicate(HR::HillRegion)::ImplicitEquations.Pred
               μ * ρ₂(x, y)^2 + (1 - μ) * ρ₁(x, y)^2
     return V ⩵ C
 end
+
+end
+
+using .Internal
 
 @recipe function f(
         HR::HillRegion;
