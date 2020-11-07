@@ -5,7 +5,7 @@ anyerrors = false
 
 # Specify tests
 tests_dir = joinpath(@__DIR__, "tests")
-tests = ["HillRegion.jl", "regression/regression.jl"]
+tests = ["TestHillRegion.jl", "regression/TestRegression.jl"]
 
 # Print info
 println("\e[1;32mRUNNING TESTS\e[0m for `HillRegions.jl`")
