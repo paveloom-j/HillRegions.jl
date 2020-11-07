@@ -12,17 +12,15 @@ baremodule HillRegions
 
 export HillRegion
 
-using Base
-using Colors
-using RecipesBase
-
 "This module contains all inner parts of this package."
 baremodule Internal
 
-export HillRegion, _predicate
+export HillRegion
 
 using Base
+using Colors
 using ImplicitEquations: OInterval, Pred, ⩵
+using RecipesBase
 using UnPack
 
 # Types
@@ -37,61 +35,11 @@ Base.include(Internal, "include/formulae/_V.jl")
 # Predicate
 Base.include(Internal, "include/_predicate.jl")
 
+# Recipe
+Base.include(Internal, "include/@recipe.jl")
+
 end
 
 using .Internal
-
-"f"
-@recipe function f(
-        HR::HillRegion;
-        M=10,
-        N=10,
-        bodiesmarker=:x,
-        bodiescolor=colorant"#425378",
-        shapecolor=colorant"#425378",
-    )
-
-    @assert isa(M, Int) "`M` should be of type `Int`"
-    @assert isa(N, Int) "`N` should be of type `Int`"
-    @assert(
-        isa(bodiescolor, Union{RGB, Symbol}),
-        "`bodiescolor` should be of type `RGB` or `Symbol`",
-    )
-    @assert isa(bodiesmarker, Symbol) "`bodiesmarker` should of type `Symbol`"
-    @assert(
-        isa(shapecolor, Union{RGB, Symbol}),
-        "`shapecolor` should be of type `RGB` or `Symbol`",
-    )
-    @assert isa(dpi, Int) "`dpi` should be of type `Int`"
-
-    μ = M_TYPE(HR.μ)
-    dpi --> 320
-
-    # Left and right bodies
-    @series begin
-        markercolor --> bodiescolor
-        markershape --> bodiesmarker
-        seriestype --> :scatter
-        ([-μ, 1 - μ], [0., 0.])
-    end
-
-    # Hill region
-    @series begin
-        fillcolor --> shapecolor
-        M --> M
-        N --> N
-        _predicate(HR)
-    end
-
-    return nothing
-end
-
-apply_recipe(plotattributes::AbstractDict{Symbol,Any}, HR::HillRegion) =
-RecipesBase.apply_recipe(plotattributes::AbstractDict{Symbol,Any}, HR::HillRegion)
-
-@doc(
-    @doc(RecipesBase.apply_recipe(plotattributes::AbstractDict{Symbol,Any}, HR::HillRegion)),
-    apply_recipe
-)
 
 end
