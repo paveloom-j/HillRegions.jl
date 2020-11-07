@@ -13,7 +13,6 @@ and the Jacobi constant (``C``).
 - `HillRegion(C::C_TYPE; μ::M_TYPE)`
 - `HillRegion(μ::M_TYPE; C::C_TYPE)`
 - `HillRegion(μ::M_TYPE, C::C_TYPE)`
-- `HillRegion(μ, C)`
 """
 Base.@kwdef struct HillRegion
     μ::M_TYPE
