@@ -7,12 +7,12 @@
 
     @assert isa(bodiesmarker, Symbol) "`bodiesmarker` should of type `Symbol`"
     @assert(
-        isa(shapecolor, Union{RGB, Symbol}),
-        "`shapecolor` should be of type `RGB` or `Symbol`",
-    )
-    @assert(
         isa(bodiescolor, Union{RGB, Symbol}),
         "`bodiescolor` should be of type `RGB` or `Symbol`",
+    )
+    @assert(
+        isa(shapecolor, Union{RGB, Symbol}),
+        "`shapecolor` should be of type `RGB` or `Symbol`",
     )
 
     μ = MR_TYPE(HR.μ)
@@ -20,8 +20,8 @@
 
     # Left and right bodies
     @series begin
-        markercolor --> bodiescolor
         markershape --> bodiesmarker
+        markercolor --> bodiescolor
         seriestype --> :scatter
         ([-μ, 1 - μ], [0., 0.])
     end

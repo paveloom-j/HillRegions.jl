@@ -5,6 +5,6 @@ IntervalArithmetic = "d1acc4aa-44c8-5952-acd4-ba5d80a2a253"
 
 [compat]
 Documenter = "0.25.3"
-ImplicitEquations = "~1.0.1"
+ImplicitEquations = "~1.0.2"
 IntervalArithmetic = "0.17.5"
 julia = "1.5"
