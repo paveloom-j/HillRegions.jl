@@ -1,12 +1,12 @@
 __precompile__()
 
 """
-A complimentary package to add the recipe for
+A complimentary package to add the recipe to
 [`Plots.jl`](https://github.com/JuliaPlots/Plots.jl) for plotting Hill regions.
 
 Links:
-- [Repo](https://github.com/paveloom-j/HillRegions.jl)
-- [Docs](https://paveloom-j.github.io/HillRegions.jl)
+- [Repository](https://github.com/paveloom-j/HillRegions.jl)
+- [Documentation](https://paveloom-j.github.io/HillRegions.jl)
 """
 baremodule HillRegions
 

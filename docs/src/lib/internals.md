@@ -20,7 +20,3 @@ Order = [:constant, :type]
 Modules = [HillRegions.Internal]
 Order = [:function]
 ```
-
-```@docs
-HillRegions.apply_recipe
-```
