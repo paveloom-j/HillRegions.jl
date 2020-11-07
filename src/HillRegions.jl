@@ -1,80 +1,45 @@
+__precompile__()
+
+"""
+A complimentary package to add the recipe to
+[`Plots.jl`](https://github.com/JuliaPlots/Plots.jl) for plotting Hill regions.
+
+Links:
+- [Repository](https://github.com/paveloom-j/HillRegions.jl)
+- [Documentation](https://paveloom-j.github.io/HillRegions.jl)
+"""
 baremodule HillRegions
+
+export HillRegion
+
+"This module contains all inner parts of this package."
+baremodule Internal
 
 export HillRegion
 
 using Base
 using Colors
+using ImplicitEquations: OInterval, Pred, ⩵
 using RecipesBase
+using UnPack
 
-baremodule Internal
+# Types
+Base.include(Internal, "include/types/DefaultTypes.jl")
+Base.include(Internal, "include/types/HillRegion.jl")
 
-export HillRegion, _predicate
+# Formulae
+Base.include(Internal, "include/formulae/_ρ₁.jl")
+Base.include(Internal, "include/formulae/_ρ₂.jl")
+Base.include(Internal, "include/formulae/_V.jl")
 
-using Base
-using ImplicitEquations
-using Parameters
+# Predicate
+Base.include(Internal, "include/_predicate.jl")
 
-@with_kw struct HillRegion
-    μ::Rational
-    C::Float64
-end
-
-function _predicate(HR::HillRegion)::ImplicitEquations.Pred
-    @unpack μ, C = HR
-    ρ₁(x, y) = √((x + μ)^2 + y^2)
-    ρ₂(x, y) = √((x - 1 + μ)^2 + y^2)
-    V(x, y) = 2 * μ / ρ₂(x, y) + 2 * (1 - μ) / ρ₁(x, y) +
-              μ * ρ₂(x, y)^2 + (1 - μ) * ρ₁(x, y)^2
-    return V ⩵ C
-end
+# Recipe
+Base.include(Internal, "include/@recipe.jl")
 
 end
 
 using .Internal
-
-@recipe function f(
-        HR::HillRegion;
-        M=10,
-        N=10,
-        bodiesmarker=:x,
-        markercolor=colorant"#425378",
-        shapecolor=colorant"#425378",
-        dpi=320,
-    )
-
-    @assert isa(M, Int) "`M` should be of type `Int`"
-    @assert isa(N, Int) "`N` should be of type `Int`"
-    @assert(
-        isa(markercolor, Union{RGB, Symbol}),
-        "`markercolor` should be of type `RGB` or `Symbol`",
-    )
-    @assert isa(bodiesmarker, Symbol) "`bodiesmarker` should of type `Symbol`"
-    @assert(
-        isa(shapecolor, Union{RGB, Symbol}),
-        "`shapecolor` should be of type `RGB` or `Symbol`",
-    )
-    @assert isa(dpi, Int) "`dpi` should be of type `Int`"
-
-    μ = Float64(HR.μ)
-    dpi --> dpi
-
-    # Left and right bodies
-    @series begin
-        markercolor --> markercolor
-        markershape --> bodiesmarker
-        seriestype --> :scatter
-        ([-μ, 1 - μ], [0., 0.])
-    end
-
-    # Hill region
-    @series begin
-        fillcolor --> shapecolor
-        M --> M
-        N --> N
-        _predicate(HR)
-    end
-
-    return nothing
-end
 
 end
