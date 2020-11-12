@@ -36,7 +36,7 @@ A recipe to plot Hill regions.
 
 ```
 
-A complimentary package to add the recipe to
+A complementary package to add the recipe to
 [`Plots.jl`](https://github.com/JuliaPlots/Plots.jl) for plotting Hill regions.
 
 ## Package Features

@@ -18,5 +18,5 @@ _A recipe to plot Hill regions._
 [license-img]: https://img.shields.io/badge/license-MIT-5DA399.svg
 [license-url]: https://github.com/paveloom-j/HillRegions.jl/blob/master/LICENSE.md
 
-A complimentary package to add the recipe to
+A complementary package to add the recipe to
 [`Plots.jl`](https://github.com/JuliaPlots/Plots.jl) for plotting Hill regions.
