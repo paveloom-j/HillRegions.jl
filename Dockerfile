@@ -9,8 +9,8 @@ LABEL github-repository="https://github.com/paveloom-j/HillRegions.jl"
 LABEL docker-repository="https://github.com/orgs/paveloom-j/packages/container/hillregions/"
 
 # Install the package
-RUN julia -e 'using Pkg; pkg"registry add https://github.com/paveloom-j/PaveloomSPBU"' \
-    git -C ~/.julia/registries/PaveloomSPBU checkout master \
+RUN julia -e 'using Pkg; pkg"registry add https://github.com/paveloom-j/PaveloomRegistry"' \
+    git -C ~/.julia/registries/PaveloomRegistry checkout master \
     julia -e 'pkg"add HillRegions, Plots"; using HillRegions, Plots'
 
 # Get the notebook
