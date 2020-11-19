@@ -9,7 +9,9 @@ LABEL github-repository="https://github.com/paveloom-j/HillRegions.jl"
 LABEL docker-repository="https://github.com/orgs/paveloom-j/packages/container/hillregions/"
 
 # Install the C compiler
-RUN sudo apt-get update >/dev/null && apt-get install -y --no-install-recommends gcc >/dev/null && rm -rf /var/lib/apt/lists/*
+RUN sudo apt-get update >/dev/null && \
+    sudo apt-get install -y --no-install-recommends gcc >/dev/null && \
+    sudo rm -rf /var/lib/apt/lists/*
 
 # Install the package
 RUN julia -e 'using Pkg; \
