@@ -12,7 +12,21 @@ the lesser of the two masses of the resting bodies.
 
 This package is an implementation of a learning assignment and solves a very narrow problem,
 so it is not available in the [General](https://github.com/JuliaRegistries/General)
-registry. It will be available in the personal registry soon.
+registry. You can get it from the
+[PaveloomRegistry](https://github.com/paveloom-j/PaveloomRegistry), though.
+
+First off, you need to add the registry: from the Julia REPL, type `]` to enter the Pkg
+REPL mode and run:
+
+```
+pkg> registry add https://github.com/paveloom-j/PaveloomRegistry
+```
+
+Then you can install the package:
+
+```
+pkg> add HillRegions
+```
 
 ## Plotting Hill curves
 
