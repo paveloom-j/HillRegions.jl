@@ -8,6 +8,9 @@ LABEL description="A playground for the `HillRegions.jl` package."
 LABEL github-repository="https://github.com/paveloom-j/HillRegions.jl"
 LABEL docker-repository="https://github.com/orgs/paveloom-j/packages/container/hillregions/"
 
+# Install the C compiler
+RUN sudo apt-get update >/dev/null && apt-get install -y --no-install-recommend gcc && rm -rf /var/lib/apt/lists/*
+
 # Install the package
 RUN julia -e 'using Pkg; \
               pkg"registry add https://github.com/paveloom-j/PaveloomRegistry"; \
