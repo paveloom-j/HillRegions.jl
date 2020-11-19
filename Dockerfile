@@ -8,10 +8,10 @@ LABEL description="A playground for the `HillRegions.jl` package."
 LABEL github-repository="https://github.com/paveloom-j/HillRegions.jl"
 LABEL docker-repository="https://github.com/orgs/paveloom-j/packages/container/hillregions/"
 
-# Install the C compiler
+# Install the build tools
 RUN echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections && \
     sudo apt-get update >/dev/null && \
-    sudo apt-get install -y --no-install-recommends gcc >/dev/null && \
+    sudo apt-get install -y --no-install-recommends build-essential >/dev/null && \
     sudo rm -rf /var/lib/apt/lists/* && \
     echo 'debconf debconf/frontend select Dialog' | sudo debconf-set-selections
 
