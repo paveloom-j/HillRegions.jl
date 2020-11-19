@@ -9,9 +9,11 @@ LABEL github-repository="https://github.com/paveloom-j/HillRegions.jl"
 LABEL docker-repository="https://github.com/orgs/paveloom-j/packages/container/hillregions/"
 
 # Install the C compiler
-RUN sudo apt-get update >/dev/null && \
+RUN echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections && \
+    sudo apt-get update >/dev/null && \
     sudo apt-get install -y --no-install-recommends gcc >/dev/null && \
-    sudo rm -rf /var/lib/apt/lists/*
+    sudo rm -rf /var/lib/apt/lists/* && \
+    echo 'debconf debconf/frontend select Dialog' | sudo debconf-set-selections
 
 # Install the package
 RUN julia -e 'using Pkg; \
