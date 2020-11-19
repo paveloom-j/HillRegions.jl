@@ -8,10 +8,17 @@ LABEL description="A playground for the `HillRegions.jl` package."
 LABEL github-repository="https://github.com/paveloom-j/HillRegions.jl"
 LABEL docker-repository="https://github.com/orgs/paveloom-j/packages/container/hillregions/"
 
+# Install the build tools
+RUN echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections && \
+    sudo apt-get update >/dev/null && \
+    sudo apt-get install -y --no-install-recommends build-essential >/dev/null && \
+    sudo rm -rf /var/lib/apt/lists/* && \
+    echo 'debconf debconf/frontend select Dialog' | sudo debconf-set-selections
+
 # Install the package
-RUN julia -e 'using Pkg; pkg"registry add https://github.com/paveloom-j/PaveloomRegistry"' \
-    git -C ~/.julia/registries/PaveloomRegistry checkout master \
-    julia -e 'pkg"add HillRegions, Plots"; using HillRegions, Plots'
+RUN julia -e 'using Pkg; \
+              pkg"registry add https://github.com/paveloom-j/PaveloomRegistry"; \
+              pkg"add HillRegions, Plots"; using HillRegions, Plots'
 
 # Get the notebook
 RUN wget https://raw.githubusercontent.com/paveloom-j/HillRegions.jl/master/binder/playground.ipynb >/dev/null 2>&1
