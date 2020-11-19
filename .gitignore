@@ -12,3 +12,6 @@ docs/build
 /*.svg
 /*.gif
 /*.png
+
+# Jupyter checkpoints
+.ipynb_checkpoints
